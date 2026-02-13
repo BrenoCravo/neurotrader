@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diário de Performance - NeuroTrader</title>
+    <!-- Same CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .class-container {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .bonus-card {
+            background: linear-gradient(145deg, #3e2723, #5d4037);
+            border: 1px solid #ffab91;
+            border-radius: 12px;
+            padding: 3rem;
+            text-align: center;
+            color: #fff;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+        if (!sessionStorage.getItem('neuroAuth')) {
+            window.location.href = '../acesso.html';
+        }
+    </script>
+
+    <div class="class-container">
+        <a href="../members.html" style="color: #888; margin-bottom: 2rem; display: block;"><i
+                class="fas fa-arrow-left"></i> VOLTAR</a>
+
+        <div class="bonus-card">
+            <h1><i class="fas fa-book-open"></i> Diário de Performance Emocional</h1>
+            <p style="margin: 1.5rem 0; font-size: 1.1rem; color: #ffccbc;">"O que não é medido não pode ser
+                gerenciado."</p>
+            <p style="color: #ddd;">Pare de anotar apenas Entrada e Saída. Baixe a planilha abaixo:</p>
+            <ul style="text-align: left; display: inline-block; margin: 1rem 0; color: #eee;">
+                <li>Nível de Sono (0-10)</li>
+                <li>Nível de Stress Pré-Pregão</li>
+                <li>Gatilho Biológico durante o trade</li>
+            </ul>
+            <br>
+            <a href="../material/Diario_Emocional.csv" download class="cta-button"
+                style="background: #ffab91; color: #3e2723; padding: 1rem 2rem; font-weight: 900; margin-top: 1rem;">BAIXAR
+                PLANILHA (CSV)</a>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

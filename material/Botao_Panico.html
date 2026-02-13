@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocolo de Emergência - NeuroTrader</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .circle {
+            width: 100px;
+            height: 100px;
+            border: 4px solid #ff1744;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            animation: breathe 4s infinite ease-in-out;
+        }
+
+        @keyframes breathe {
+            0% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: scale(1.5);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+        }
+
+        h1 {
+            color: #ff1744;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+        }
+
+        p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            line-height: 1.4;
+        }
+
+        .instruction {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="circle"><i style="font-size: 2rem;">STOP</i></div>
+
+    <h1>Protocolo de Emergência Ativado</h1>
+
+    <p>"Eu aceito que o mercado é soberano."</p>
+    <p>"Essa perda é apenas um dado estatístico, não define quem eu sou."</p>
+    <p>"Hoje eu escolho proteger meu capital para lutar amanhã."</p>
+
+    <div class="instruction">INSPIRE quando o círculo crescer. EXPIRE quando diminuir. (3x)</div>
+
+</body>
+
+</html>

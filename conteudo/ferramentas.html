@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caixa de Ferramentas - NeuroTrader</title>
+    <!-- Same CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .class-container {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .tool-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .tool-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            width: 80px;
+            height: 80px;
+            background: rgba(41, 98, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .tool-info h3 {
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-info p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .action-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-mini {
+            border: 1px solid var(--border-color);
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-mini:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .audio-player-mini {
+            width: 100%;
+            height: 40px;
+            background: #222;
+            border-radius: 20px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            color: #888;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+        if (!sessionStorage.getItem('neuroAuth')) {
+            window.location.href = '../acesso.html';
+        }
+    </script>
+
+    <div class="class-container">
+        <a href="../members.html" style="color: #888; margin-bottom: 2rem; display: block;"><i
+                class="fas fa-arrow-left"></i> VOLTAR</a>
+        <h1 style="color: #fff; margin-bottom: 2rem;">Arsenal de Guerra (Tools)</h1>
+
+        <!-- Tool 1 -->
+        <div class="tool-card" style="border-left: 4px solid var(--danger);">
+            <div class="tool-icon" style="color: var(--danger); background: rgba(255,23,68,0.1);">
+                <i class="fas fa-hand-paper"></i>
+            </div>
+            <div class="tool-info" style="width: 100%;">
+                <h3>Botão Pânico (Guia de Emergência)</h3>
+                <p>O roteiro de auto-diálogo para ler IMEDIATAMENTE após um Stop Loss doloroso.</p>
+                <a href="../material/Botao_Panico.html" target="_blank" class="btn-mini"
+                    style="background: var(--danger);; border: none;"><i class="fas fa-book-medical"></i> LER ROTEIRO
+                    AGORA</a>
+            </div>
+        </div>
+
+        <!-- Tool 2 -->
+        <div class="tool-card">
+            <div class="tool-icon">
+                <i class="fas fa-fire"></i>
+            </div>
+            <div class="tool-info">
+                <h3>Rotina Pré-Fogo (Checklist)</h3>
+                <p>O checklist mental para fazer ANTES de abrir a plataforma e entrar em Estado de Fluxo.</p>
+                <div class="action-row">
+                    <a href="../material/Checklist_PreFogo.html" target="_blank" class="btn-mini"><i
+                            class="fas fa-file-code"></i> ABRIR CHECKLIST DIGITAL</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tool 3 -->
+        <div class="tool-card">
+            <div class="tool-icon" style="color: var(--accent); background: rgba(0,230,118,0.1);">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="tool-info">
+                <h3>Calculadora de Risco (App)</h3>
+                <p>Calculadora automática de lote baseada no seu capital emocional do dia.</p>
+                <div class="action-row">
+                    <a href="../material/Planilha_Risco.html" target="_blank" class="btn-mini"><i
+                            class="fas fa-calculator"></i> ABRIR CALCULADORA ONLINE</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

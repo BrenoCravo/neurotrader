@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocolo 21 Dias - NeuroTrader</title>
+    <!-- Same CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .class-container {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .week-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .cta-big {
+            display: inline-block;
+            background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%);
+            color: #fff;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 700;
+            margin: 1.5rem 0;
+            font-family: 'Outfit';
+            text-decoration: none;
+            width: 100%;
+            text-align: center;
+        }
+
+        .week-header {
+            background: rgba(41, 98, 255, 0.1);
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .week-header h2 {
+            font-size: 1.2rem;
+            color: #fff;
+            margin: 0;
+        }
+
+        .week-header span {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .day-list {
+            padding: 1rem;
+        }
+
+        .day-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.2s;
+        }
+
+        .day-item:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .day-item:last-child {
+            border-bottom: none;
+        }
+
+        .check-circle {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--text-muted);
+            border-radius: 50%;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        .check-circle.checked {
+            background: var(--accent);
+            border-color: var(--accent);
+            position: relative;
+        }
+
+        .check-circle.checked::after {
+            content: '✓';
+            color: #000;
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 14px;
+        }
+
+        .day-content h4 {
+            font-size: 1rem;
+            color: #eee;
+            margin-bottom: 0.2rem;
+        }
+
+        .day-content p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+        if (!sessionStorage.getItem('neuroAuth')) {
+            window.location.href = '../acesso.html';
+        }
+    </script>
+
+    <div class="class-container">
+        <a href="../members.html" style="color: #888; margin-bottom: 2rem; display: block;"><i
+                class="fas fa-arrow-left"></i> VOLTAR</a>
+
+        <h1 style="color: #fff;">Protocolo 21 Dias</h1>
+        <p style="color: var(--text-muted); margin-bottom: 1rem;">O guia passo a passo para sua reprogramação neural.
+        </p>
+
+        <a href="../material/Protocolo_21Dias.html" target="_blank" class="cta-big"><i class="fas fa-print"></i> ABRIR
+            GUIA DE BOLSO (PDF)</a>
+
+    </div>
+
+</body>
+
+</html>

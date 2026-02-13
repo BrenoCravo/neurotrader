@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido Confirmado - NeuroTrader</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: var(--bg-dark);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .monitor-frame {
+            background: var(--card-bg);
+            border: 1px solid var(--accent);
+            padding: 3rem;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 0 50px rgba(0, 230, 118, 0.2);
+            position: relative;
+        }
+
+        .monitor-frame::before {
+            content: "SECURE TRANSACTION VERIFIED";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-dark);
+            padding: 0 15px;
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        .access-code-box {
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px dashed var(--primary);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .code-display {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            color: var(--primary);
+            letter-spacing: 5px;
+            font-weight: 700;
+            user-select: all;
+            /* Easy copy */
+        }
+
+        .copy-btn {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 10px;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="monitor-frame">
+        <i class="fas fa-check-circle" style="font-size: 4rem; color: var(--accent); margin-bottom: 1.5rem;"></i>
+        <h1 style="font-family: 'Outfit'; margin-bottom: 0.5rem;">Pagamento Confirmado!</h1>
+        <p style="color: var(--text-muted); font-family: 'JetBrains Mono';">Seu acesso ao Protocolo NeuroTrader foi
+            liberado.</p>
+
+        <div class="access-code-box">
+            <p style="color: #ccc; margin-bottom: 10px; font-size: 0.9rem;">SEU CÓDIGO DE ACESSO ÚNICO:</p>
+            <div class="code-display" id="access-code">NT-ALPHA</div>
+            <div class="copy-btn" onclick="copyCode()"><i class="far fa-copy"></i> Clique para copiar</div>
+        </div>
+
+        <p style="font-size: 0.9rem; color: #aaa; margin-bottom: 2rem;">
+            ⚠️ <strong>Importante:</strong> Você precisará deste código na próxima tela para desbloquear o sistema.
+            <br>Um email com este código também foi enviado para você.
+        </p>
+
+        <a href="acesso.html" class="cta-button" style="display: block; width: 100%;">ACESSAR ÁREA DE MEMBROS
+            &raquo;</a>
+    </div>
+
+    <script>
+        function copyCode() {
+            const code = document.getElementById('access-code').innerText;
+            navigator.clipboard.writeText(code);
+            alert('Código copiado: ' + code);
+        }
+    </script>
+</body>
+
+</html>

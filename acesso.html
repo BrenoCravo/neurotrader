@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sessão Segura - NeuroTrader</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: var(--bg-dark);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .login-frame {
+            background: linear-gradient(135deg, rgba(23, 27, 38, 0.95), rgba(0, 0, 0, 0.9));
+            border: 1px solid var(--border-color);
+            padding: 3rem;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+        }
+
+        .login-header h1 {
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 2px;
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .input-label {
+            /* Small label */
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            display: block;
+            font-family: 'JetBrains Mono';
+        }
+
+        .code-input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            color: #fff;
+            font-family: 'JetBrains Mono';
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            border-radius: 6px;
+            text-transform: uppercase;
+        }
+
+        .code-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(41, 98, 255, 0.2);
+            outline: none;
+        }
+
+        .error-msg {
+            color: var(--danger);
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono';
+            margin-top: 5px;
+            display: none;
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            width: 100%;
+            padding: 1rem;
+            border-radius: 6px;
+            font-weight: 700;
+            font-family: 'Outfit';
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .submit-btn:hover {
+            background: #1a4cd2;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-frame">
+        <div class="login-header">
+            <i class="fas fa-lock" style="font-size: 3rem; color: var(--text-muted); margin-bottom: 1rem;"></i>
+            <h1>NEUROTRADER <br><span style="font-size: 0.8rem; color: #666;">SECURE ACCESS</span></h1>
+        </div>
+
+        <form onsubmit="handleLogin(event)">
+            <div class="input-group">
+                <label for="code" class="input-label">INSIRA SEU TOKEN DE ACESSO:</label>
+                <input type="text" id="code" class="code-input" placeholder="EX: NT-1234" autocomplete="off">
+                <p id="error-msg" class="error-msg"><i class="fas fa-times-circle"></i> Código Inválido. Verifique seu
+                    email.</p>
+            </div>
+
+            <button type="submit" class="submit-btn">VALIDAR TOKEN &raquo;</button>
+        </form>
+
+        <p style="margin-top: 2rem; font-size: 0.8rem; color: #555;">
+            Precisa de ajuda? <a href="#" style="color: #777; text-decoration: underline;">Fale com suporte</a>
+        </p>
+
+        <!-- Simulated Loading overlay -->
+        <div id="loading"
+            style="display: none; position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.9); border-radius: 12px; flex-direction: column; align-items: center; justify-content: center; z-index: 10;">
+            <i class="fas fa-circle-notch fa-spin" style="font-size: 3rem; color: var(--accent);"></i>
+            <p style="margin-top: 1rem; color: var(--accent); font-family: 'JetBrains Mono';">CONNECTING...</p>
+        </div>
+    </div>
+
+    <script>
+        function handleLogin(e) {
+            e.preventDefault();
+            const input = document.getElementById('code').value.toUpperCase().trim();
+            const errorMsg = document.getElementById('error-msg');
+            const loading = document.getElementById('loading');
+
+            // Accepted Codes (for demo)
+            const validCodes = ['NT2026', 'NT-ALPHA', 'NT-BETA', 'NEUROTRADER', 'ADMIN'];
+
+            if (validCodes.includes(input)) {
+                // Success
+                errorMsg.style.display = 'none';
+                loading.style.display = 'flex';
+
+                // Store session
+                sessionStorage.setItem('neuroAuth', 'true');
+
+                setTimeout(() => {
+                    window.location.href = 'members.html';
+                }, 1500); // Fake delay
+            } else {
+                // Fail
+                errorMsg.style.display = 'block';
+                input.classList.add('shake');
+                setTimeout(() => input.classList.remove('shake'), 500);
+            }
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área de Membros - NeuroTrader</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Specific Dashboard overrides */
+        body {
+            background-attachment: fixed;
+        }
+
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .welcome-banner {
+            background: linear-gradient(90deg, #0b0e14 0%, rgba(41, 98, 255, 0.1) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .welcome-text h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-text p {
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .progress-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(var(--accent) 0%, transparent 0%);
+            /* 0% progress */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0, 230, 118, 0.1);
+        }
+
+        .progress-circle::before {
+            content: '';
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            background: var(--bg-dark);
+            border-radius: 50%;
+        }
+
+        .progress-text {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .progress-text span {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .progress-text small {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        /* Modules Grid */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .module-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 0.3s;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .module-thumb {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .module-thumb::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, #0b0e14 0%, transparent 100%);
+        }
+
+        .doc-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            transition: 0.3s;
+        }
+
+        .module-card:hover .doc-icon {
+            color: var(--primary);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .module-content {
+            padding: 1.5rem;
+        }
+
+        .module-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 2px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .module-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .module-content p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* Locked State */
+        .locked {
+            opacity: 0.6;
+            pointer-events: none;
+            filter: grayscale(1);
+        }
+
+        .lock-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #000;
+            padding: 10px;
+            border-radius: 50%;
+            color: #fff;
+            z-index: 10;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Authentication Check -->
+    <script>
+        if (!sessionStorage.getItem('neuroAuth')) {
+            window.location.href = 'acesso.html';
+        }
+    </script>
+
+    <!-- Header -->
+    <div class="result-header">
+        <div class="container-fluid" style="display: flex; justify-content: space-between; padding: 0 2rem;">
+            <p style="font-size: 1.2rem; font-weight: 900; color: #fff;">NEURO<span
+                    style="color: var(--primary);">TRADER</span></p>
+            <p><a href="#" onclick="sessionStorage.removeItem('neuroAuth'); window.location.href='index.html';"
+                    class="highlight-text"><i class="fas fa-sign-out-alt"></i> SAIR</a></p>
+        </div>
+    </div>
+
+    <main class="dashboard-container">
+
+        <!-- Welcome -->
+        <div class="welcome-banner">
+            <div class="welcome-text">
+                <h1>Hub de Estudos, Trader.</h1>
+                <p>Seus materiais digitais estão disponíveis abaixo.</p>
+            </div>
+        </div>
+
+        <h2 style="color: #fff; margin-bottom: 25px; border-left: 4px solid var(--accent); padding-left: 15px;">SEUS
+            MATERIAIS</h2>
+
+        <!-- Modules Grid -->
+        <div class="modules-grid">
+
+            <!-- Mod 1: Dossiê -->
+            <div class="module-card" onclick="window.location.href='conteudo/dossie.html'">
+                <div class="module-thumb"
+                    style="background-image: url('https://placehold.co/600x400/111/444?text=MODULO+01:+O+DOSSIE');">
+                    <i class="fas fa-file-alt doc-icon"></i>
+                </div>
+                <div class="module-content">
+                    <span class="module-tag">EBOOK</span>
+                    <h3>Módulo 01: O Dossiê Secreto</h3>
+                    <p>O texto completo sobre a biologia por trás da sua perda. (Leitura Obrigatória).</p>
+                </div>
+            </div>
+
+            <!-- Mod 2: Protocolo (CORE) -->
+            <div class="module-card" onclick="window.location.href='conteudo/protocolo.html'">
+                <div class="module-thumb"
+                    style="background-image: url('https://placehold.co/600x400/004d40/00e676?text=MODULO+02:+PROTOCOLO+21D');">
+                    <i class="fas fa-tasks doc-icon"></i>
+                </div>
+                <div class="module-content">
+                    <span class="module-tag">CHECKLIST</span>
+                    <h3>Módulo 02: Protocolo 21 Dias</h3>
+                    <p>Seu plano diário de reprogramação. Baixe o PDF e siga o roteiro.</p>
+                </div>
+            </div>
+
+            <!-- Mod 3: Ferramentas -->
+            <div class="module-card" onclick="window.location.href='conteudo/ferramentas.html'">
+                <div class="module-thumb"
+                    style="background-image: url('https://placehold.co/600x400/512da8/e040fb?text=MODULO+03:+FERRAMENTAS');">
+                    <i class="fas fa-toolbox doc-icon"></i>
+                </div>
+                <div class="module-content">
+                    <span class="module-tag">TOOLS</span>
+                    <h3>Módulo 03: Arsenal de Guerra</h3>
+                    <p>Baixe os arquivos de áudio do "Botão Pânico" e planilhas auxiliares.</p>
+                </div>
+            </div>
+
+            <!-- Bonus -->
+            <div class="module-card" onclick="window.location.href='conteudo/diario.html'">
+                <div class="module-thumb"
+                    style="background-image: url('https://placehold.co/600x400/3e2723/ffab91?text=BONUS:+DIARIO');">
+                    <i class="fas fa-file-excel doc-icon" style="font-size: 2rem;"></i>
+                </div>
+                <div class="module-content">
+                    <span class="module-tag">PLANILHA</span>
+                    <h3>Diário de Performance</h3>
+                    <p>A planilha automatizada para rastrear seus gatilhos emocionais x resultados.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="simple-footer">
+        <p>NeuroMarket Science &copy; 2026</p>
+    </footer>
+
+</body>
+
+</html>
