@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALERTA: O "Assassino Silencioso" de Contas no Day Trade</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300&family=Inter:wght@400;600;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #c00;
+            /* News Red */
+            --highlight: #fffacd;
+            --text-dark: #1a1a1a;
+            --text-gray: #555;
+            --border: #e2e2e2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            color: var(--text-dark);
+            background-color: #fff;
+            line-height: 1.8;
+            font-size: 19px;
+            /* Leitura confortável */
+        }
+
+        /* Reading Progress */
+        #progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: transparent;
+            z-index: 1000;
+        }
+
+        #progress-bar {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        /* Header */
+        header {
+            background: #fff;
+            border-bottom: 2px solid #000;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 900;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 1.4rem;
+            letter-spacing: -1px;
+            color: #000;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .meta-category {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 40px;
+            display: inline-block;
+            border-bottom: 2px solid var(--primary);
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: 2.4rem;
+            line-height: 1.1;
+            margin: 10px 0 20px 0;
+            letter-spacing: -1px;
+        }
+
+        .subheadline {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.3rem;
+            color: #444;
+            font-weight: 400;
+            margin-bottom: 25px;
+            line-height: 1.4;
+            border-left: 4px solid #ddd;
+            padding-left: 20px;
+        }
+
+        /* Author */
+        .author-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 15px 0;
+            margin-bottom: 40px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+        }
+
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #eee;
+        }
+
+        .author-meta strong {
+            display: block;
+            color: #000;
+            font-weight: 700;
+        }
+
+        .author-meta span {
+            color: #666;
+        }
+
+        .share-icons {
+            margin-left: auto;
+            color: #aaa;
+            gap: 15px;
+            display: flex;
+            font-size: 1.2rem;
+        }
+
+        /* Content */
+        p {
+            margin-bottom: 1.5em;
+        }
+
+        .highlight {
+            background: var(--highlight);
+            padding: 0 5px;
+            font-weight: 700;
+            border-radius: 4px;
+        }
+
+        h2 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: 1.8rem;
+            margin-top: 2.5em;
+            margin-bottom: 0.8em;
+            line-height: 1.2;
+            color: #111;
+        }
+
+        figure {
+            margin: 2.5em -20px;
+        }
+
+        figure img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 4px;
+        }
+
+        figcaption {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: #666;
+            text-align: center;
+            padding: 10px;
+            font-style: italic;
+            background: #f9f9f9;
+        }
+
+        /* Callout Box */
+        .callout-box {
+            background-color: #fce8e8;
+            border-left: 5px solid var(--primary);
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .callout-title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Bullet List */
+        .emoji-list {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .emoji-list li {
+            margin-bottom: 15px;
+            padding-left: 35px;
+            position: relative;
+            font-weight: 600;
+        }
+
+        .emoji-list li::before {
+            content: '❌';
+            /* Default */
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 1.2rem;
+        }
+
+        .emoji-list.success li::before {
+            content: '✅';
+        }
+
+        /* Sticky CTA */
+        .sticky-cta {
+            background-color: #0b0e14;
+            color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 50px 0;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            border: 1px solid #333;
+        }
+
+        .sticky-cta h3 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+        }
+
+        .btn-pulse {
+            display: block;
+            background: linear-gradient(90deg, #00c853 0%, #00e676 100%);
+            color: #000;
+            padding: 20px;
+            border-radius: 8px;
+            font-weight: 900;
+            text-decoration: none;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.7);
+            }
+
+            70% {
+                transform: scale(1.02);
+                box-shadow: 0 0 0 15px rgba(0, 230, 118, 0);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(0, 230, 118, 0);
+            }
+        }
+
+        .btn-micro {
+            background: none;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 10px 20px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .btn-micro:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        /* Footer */
+        .footer {
+            background: #f4f4f4;
+            border-top: 4px solid #000;
+            padding: 60px 0;
+            margin-top: 80px;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.9rem;
+            }
+
+            .subheadline {
+                font-size: 1.1rem;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <header>
+        <div class="container nav-bar">
+            <div class="logo">TRADER<span>INSIDER</span></div>
+            <div class="menu-icon"><i class="fas fa-bars"></i></div>
+        </div>
+    </header>
+
+    <main class="container">
+        <span class="meta-category">NEUROCIÊNCIA & PERFORMANCE</span>
+
+        <h1>Por que 87% dos Traders "Tecnicamente Perfeitos" Quebram a Conta (E como corrigir isso em 90 segundos)</h1>
+
+        <p class="subheadline">Um novo estudo de bio-performance chocou o mercado ao revelar que o problema não é sua
+            estratégia, nem seu setup. O problema é como seu cérebro reage biologicamente à perda. 🧠📉</p>
+
+        <div class="author-box">
+            <img src="https://ui-avatars.com/api/?name=Ricardo+M&background=0D8ABC&color=fff" alt="Ricardo Mendes"
+                class="author-img">
+            <div class="author-meta">
+                <strong>Por Ricardo Mendes</strong>
+                <span>Analista Comportamental Sênior • <i>Leitura: 4 min</i></span>
+            </div>
+            <div class="share-icons">
+                <i class="fab fa-whatsapp" style="color:#25D366"></i>
+                <i class="fab fa-telegram" style="color:#0088cc"></i>
+            </div>
+        </div>
+
+        <article>
+            <p><strong>(SÃO PAULO)</strong> — Você conhece a sensação. Todo trader conhece.</p>
+
+            <p>Você acorda motivado. Analisa o gráfico. Traça os suportes e resistências. O setup está claro. O backtest
+                diz que funciona.</p>
+
+            <p>Mas quando o mercado abre e o dinheiro real está na mesa... <strong>algo "clica" errado na sua
+                    cabeça.</strong></p>
+
+            <ul class="emoji-list">
+                <li>Você hesita na entrada perfeita (medo).</li>
+                <li>Você entra atrasado por ansiedade (FOMO).</li>
+                <li>E quando toma o primeiro Stop... você perde o controle e tenta recuperar tudo na raiva.</li>
+            </ul>
+
+            <p>O resultado? <span class="highlight">Você devolve o lucro da semana inteira em uma única tarde de
+                    fúria.</span> 😡💸</p>
+
+            <p>Se você já se sentiu "burro" por cometer os mesmos erros repetidamente, preste muita atenção: <strong>A
+                    culpa não é sua.</strong></p>
+
+            <p>Você não precisa de mais um curso de análise técnica. Você precisa entender o que está acontecendo
+                <i>dentro</i> do seu crânio.
+            </p>
+
+            <div style="text-align: center; margin: 30px 0;">
+                <button onclick="document.querySelector('.sticky-cta').scrollIntoView({behavior: 'smooth'});"
+                    class="btn-micro">QUERO MEU DIAGNÓSTICO AGORA <i class="fas fa-arrow-down"></i></button>
+            </div>
+
+            <h2>O Fenômeno do "Sequestro Neural" 🧠🔒</h2>
+
+            <figure>
+                <img src="https://i.imgur.com/oeV8HX5.png" alt="Cérebro do Trader"
+                    style="width: 100%; height: 350px; object-fit: cover; object-position: center;">
+                <figcaption>Fig 1. Atividade intensa na Amígdala durante uma perda financeira. O raciocínio lógico é
+                    "desligado".</figcaption>
+            </figure>
+
+            <p>Cientistas descobriram que perder dinheiro no mercado ativa a <strong>mesma área cerebral</strong>
+                responsável pela dor física e pelo medo de morte iminente.</p>
+
+            <div class="callout-box">
+                <div class="callout-title"><i class="fas fa-exclamation-triangle"></i> DADO CHOCANTE:</div>
+                <p>Quando você vê o gráfico indo contra sua posição, sua <strong>Amígdala</strong> (o centro do medo)
+                    sequestra o fluxo sanguíneo do seu cérebro.</p>
+                <p>O sangue sai do Córtex Pré-Frontal (Lógica/Estratégia) e vai para o Sistema Límbico (Reação/Fuga).
+                    <strong>Você literalmente fica com o QI menor durante o trade.</strong>
+                </p>
+            </div>
+
+            <p>É por isso que você sabe o que fazer, mas <strong>não consegue fazer</strong>. É biológico. É como tentar
+                segurar um espirro com força de vontade.</p>
+
+            <div style="text-align: center; margin: 30px 0;">
+                <button onclick="document.querySelector('.sticky-cta').scrollIntoView({behavior: 'smooth'});"
+                    class="btn-micro">QUERO MEU DIAGNÓSTICO AGORA <i class="fas fa-arrow-down"></i></button>
+            </div>
+
+            <h2>Você tem o Perfil do "Trader Viciado"? 🎰</h2>
+
+            <p>Além do medo, existe um inimigo ainda pior: <strong>A Dopamina.</strong></p>
+
+            <p>O mercado foi desenhado para agir no seu cérebro exatamente como uma máquina caça-níqueis. Recompensas
+                variáveis. Luzes piscando. Dinheiro rápido.</p>
+
+            <p>A maioria dos traders não está operando padrões gráficos. <span class="highlight">Eles estão operando
+                    para sentir emoção.</span></p>
+
+            <p>Para sair desse ciclo de <strong>Ganhos de Colherzinha 🥄 e Perdas de Balde 🪣</strong>, você precisa
+                "hackear" sua biologia antes de abrir a plataforma.</p>
+
+            <h2>A Solução: Protocolos de Neuro-Performance 🧪</h2>
+
+            <p>Grandes fundos de investimento não contratam apenas analistas. Eles contratam psicólogos de performance.
+            </p>
+
+            <p>Eles descobriram que existem <strong>4 Perfis de Sabotagem Neural</strong>. Cada um exige um "antídoto"
+                diferente.</p>
+
+            <p>Qual é o seu?</p>
+
+            <ul class="emoji-list">
+                <li><strong>🤬 O Vingador:</strong> Tenta se vingar do mercado após um loss.</li>
+                <li><strong>🥶 O Congelado:</strong> Trava na hora de clicar.</li>
+                <li><strong>😵 O Exausto:</strong> Opera bem de manhã, devolve tudo à tarde.</li>
+                <li><strong>🎢 O Eufórico:</strong> Aumenta a mão após um gain e quebra.</li>
+            </ul>
+
+            <div class="sticky-cta">
+                <h3>⚠️ DIAGNÓSTICO OBRIGATÓRIO</h3>
+                <p style="color: #ccc; margin-bottom: 25px;">Desenvolvemos uma ferramenta diagnóstica usada por traders
+                    institucionais para identificar seu GATILHO DE SABOTAGEM.</p>
+
+                <a href="quiz_v2.html" class="btn-pulse">FAZER O TESTE AGORA <i class="fas fa-arrow-right"></i></a>
+
+                <p style="margin-top: 15px; font-size: 0.8rem; opacity: 0.6;"><i class="fas fa-clock"></i> Tempo
+                    estimado: 60 segundos</p>
+            </div>
+
+            <p>Não tente lutar contra sua biologia usando "força de vontade". Você vai perder. Use a ciência a seu
+                favor.</p>
+
+            <p>Descubra seu perfil agora e receba o protocolo específico para blindar sua mente.</p>
+
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p style="font-weight: 700; color: #000; margin-bottom: 10px;">Market Insider &copy; 2026</p>
+            <p>Este site não é afiliado ao Facebook ou Google. Os resultados variam de pessoa para pessoa.</p>
+            <p class="links" style="margin-top: 20px;">
+                <a href="termos.html" style="color: #666;">Termos de Uso</a> |
+                <a href="privacidade.html" style="color: #666;">Privacidade</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Progress Bar
+        window.onscroll = function () {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        };
+    </script>
+</body>
+
+</html>
